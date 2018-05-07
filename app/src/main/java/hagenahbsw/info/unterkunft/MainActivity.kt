@@ -27,17 +27,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        val FilteredListLaenge = filteredUnterkunftList.size
-        val listItems = arrayOfNulls<String>(FilteredListLaenge)
-        for (i in 0 until FilteredListLaenge) {
-            val unterkunft = filteredUnterkunftList[i]
-            listItems[i] = "${unterkunft.name} \n" +
-                    "${unterkunft.desc} \n" +
-                    "[${unterkunft.geometry.coordinates[0].toString()}," +
-                    " ${unterkunft.geometry.coordinates[1].toString()}]"
-        }
-
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, listItems)
+        val adapter = UnterkunftAdapter(this, unterkunftList)
         listView.adapter = adapter
 
     }
