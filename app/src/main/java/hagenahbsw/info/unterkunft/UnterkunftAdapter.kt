@@ -9,18 +9,18 @@ import android.widget.TextView
 
 
 class UnterkunftAdapter(private val context: Context,
-                          private val dataSource : unterkuenfte) : BaseAdapter()  {
+                          private val dataSource : MutableList<Unterkunft>) : BaseAdapter()  {
     //Analog to ReceipeAdapter from www.raywenderlich.com/186976/androis-list-view-tutorial-2
 
     private val inflater: LayoutInflater
             = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
     override fun getCount(): Int {
-        return dataSource.size()
+        return dataSource.size
     }
 
     override fun getItem(position: Int): Any {
-        return dataSource.get(position)
+        return dataSource[position]
     }
 
     override fun getItemId(position: Int): Long {
@@ -34,7 +34,7 @@ class UnterkunftAdapter(private val context: Context,
         val descTextView = rowView.findViewById(R.id.unterkunft_list_desc) as TextView
         val detailTextView = rowView.findViewById(R.id.unterkunft_list_detail) as TextView
 
-        val unterkunft = getItem(position) as unterkunft
+        val unterkunft = getItem(position) as Unterkunft
         nameTextView.text = unterkunft.name
         descTextView.text = unterkunft.desc
         detailTextView.text = "[${unterkunft.geometry.coordinates[0].toString()}, " +

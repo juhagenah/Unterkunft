@@ -3,14 +3,13 @@ package hagenahbsw.info.unterkunft
 import android.content.Context
 import com.google.gson.Gson
 import org.json.JSONException
-import java.util.ArrayList
 
 
 class coord(val coordinates: Array<Double>) {
 //Abweichung von der Großschreibung der Classes wegen JSON Umwandlung und der Identität zu den Namen im JSON-String
 fun get(i: Int) = coordinates[i]
  }
-class unterkunft(val name: String,
+class Unterkunft(val name: String,
                  val desc: String,
                  val link_href: String,
                  val link_text: String,
@@ -23,27 +22,25 @@ class unterkunft(val name: String,
 }
 //Abweichung von der Großschreibung der Classes wegen JSON Umwandlung und der Identität zu den Namen im JSON-String
 
-class unterkuenfte(val Unterkuenfte: Array<unterkunft>) {
+class Unterkuenfte(val Unterkuenfte: Array<Unterkunft>) {
 //Abweichung von der Großschreibung der Classes wegen JSON Umwandlung und der Identität zu den Namen im JSON-String
     fun size() : Int = Unterkuenfte.size
     fun get(i:Int) = Unterkuenfte[i]
 
-
-
-companion object {
-    fun getUnterkuenfteFromFile(filename: String, context: Context): unterkuenfte {
+    companion object {
+    fun getUnterkuenfteFromFile(filename: String, context: Context): Unterkuenfte {
         try {
             val gsonString = loadJsonFromAsset(filename, context)
-            val myOtherunterkuenfte = Gson().fromJson(gsonString, unterkuenfte::class.java)
+            val myOtherunterkuenfte = Gson().fromJson(gsonString, Unterkuenfte::class.java)
             return myOtherunterkuenfte
         } catch (e: JSONException) {
             e.printStackTrace()
-            val myUnterkunft= unterkunft("void",
+            val myUnterkunft= Unterkunft("void",
                     "void",
                     "https://wwww.bettundbike.de",
                     "void",
                     coord(arrayOf<Double>(0.0, 0.0)))
-            val myOtherUnterkuenfte = unterkuenfte(arrayOf(myUnterkunft, myUnterkunft))
+            val myOtherUnterkuenfte = Unterkuenfte(arrayOf(myUnterkunft, myUnterkunft))
             return myOtherUnterkuenfte
             }
 
